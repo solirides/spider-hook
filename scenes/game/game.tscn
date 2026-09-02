@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cvbj8ab6cco7s"]
+
+[ext_resource type="Script" uid="uid://cr3he6m18xmfc" path="res://scenes/game/game.gd" id="1_sul5r"]
+[ext_resource type="PackedScene" uid="uid://dtdy4ee7nmeo4" path="res://modules/player/player.tscn" id="2_7h61r"]
+[ext_resource type="Script" uid="uid://bn8ghi2yuvljg" path="res://scenes/game/web.gd" id="3_0sr1o"]
+[ext_resource type="PackedScene" uid="uid://p8jj4q8cvgkw" path="res://modules/gold/gold.tscn" id="5_5i0tg"]
+[ext_resource type="PackedScene" uid="uid://dflke0foomwpr" path="res://modules/camera/camera_2d.tscn" id="5_bdhmt"]
+[ext_resource type="Texture2D" uid="uid://brbgqq26obayd" path="res://icon.svg" id="5_lfrn8"]
+
+[node name="game" type="Node2D" unique_id=1712766227]
+script = ExtResource("1_sul5r")
+
+[node name="Web" type="Node2D" parent="." unique_id=1895997186]
+script = ExtResource("3_0sr1o")
+
+[node name="Sprite2D" type="Sprite2D" parent="Web" unique_id=133306196]
+visible = false
+position = Vector2(208, 26)
+texture = ExtResource("5_lfrn8")
+
+[node name="Player" parent="." unique_id=1789688868 instance=ExtResource("2_7h61r")]
+
+[node name="Camera2D" parent="." unique_id=737584354 node_paths=PackedStringArray("target") instance=ExtResource("5_bdhmt")]
+target = NodePath("../Player")
+
+[node name="Gold" parent="." unique_id=1852013540 instance=ExtResource("5_5i0tg")]
+position = Vector2(158, -145)
+
+[node name="Alert" type="Timer" parent="." unique_id=437543074]
+one_shot = true
+
+[connection signal="timeout" from="Alert" to="." method="_on_alert_timeout"]

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://ojwfx87v5lw3"]
+
+[ext_resource type="Script" uid="uid://bjdpdefqpbfr1" path="res://modules/global/global.gd" id="1_dm7yc"]
+
+[node name="Global" type="Node2D" unique_id=106164174]
+script = ExtResource("1_dm7yc")
+
+[node name="Alert" type="Timer" parent="." unique_id=274771660]
+wait_time = 4.0

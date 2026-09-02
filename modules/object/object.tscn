@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://ddv8kvm3kq04a"]
+
+[ext_resource type="Script" uid="uid://yjs4d3h8bwt8" path="res://modules/object/object.gd" id="1_hjheb"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_hjheb"]
+
+[node name="Object" type="RigidBody2D" unique_id=381841641]
+collision_layer = 4
+collision_mask = 271
+mass = 25.0
+gravity_scale = 0.0
+script = ExtResource("1_hjheb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1235418490]
+shape = SubResource("ConvexPolygonShape2D_hjheb")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=285268094]
+color = Color(0.16185254, 0.105067484, 0.23421201, 1)

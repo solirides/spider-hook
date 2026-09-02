@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://p8jj4q8cvgkw"]
+
+[ext_resource type="Script" uid="uid://ck3pcoo51mecu" path="res://modules/gold/gold.gd" id="1_bbyyj"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_insjt"]
+
+[node name="Gold" type="RigidBody2D" unique_id=1852013540 groups=["Gold"]]
+collision_layer = 8
+collision_mask = 271
+mass = 20.0
+gravity_scale = 0.0
+script = ExtResource("1_bbyyj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=472644293]
+shape = SubResource("ConvexPolygonShape2D_insjt")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=75421509]
+color = Color(0.9516935, 0.7850152, 0.25815237, 1)

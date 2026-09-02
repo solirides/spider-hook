@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://dtdy4ee7nmeo4"]
+
+[ext_resource type="Script" uid="uid://ba33rmlfu63t3" path="res://modules/player/player.gd" id="1_qgxqk"]
+[ext_resource type="Texture2D" uid="uid://brbgqq26obayd" path="res://icon.svg" id="2_m7q0d"]
+[ext_resource type="Shader" uid="uid://dhab8jv2tj533" path="res://modules/player/rope.gdshader" id="4_ue0ku"]
+[ext_resource type="Script" uid="uid://2a1erfak83th" path="res://modules/player/rope.gd" id="5_hd5yx"]
+[ext_resource type="Script" uid="uid://by1dq4ybu3sk0" path="res://modules/player/gui.gd" id="7_5rkg0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6lmcw"]
+shader = ExtResource("4_ue0ku")
+shader_parameter/point_a = Vector2(0, 0)
+shader_parameter/point_b = Vector2(100, 200)
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/thickness = 2.0
+shader_parameter/amplitude = 5.0
+shader_parameter/frequency = 0.1
+shader_parameter/speed = 30.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6lmcw"]
+radius = 20.0
+
+[sub_resource type="SystemFont" id="SystemFont_i23br"]
+font_names = PackedStringArray("Noto Sans")
+font_weight = 300
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ej5i3"]
+font = SubResource("SystemFont_i23br")
+font_size = 34
+
+[sub_resource type="LabelSettings" id="LabelSettings_hd5yx"]
+font = SubResource("SystemFont_i23br")
+font_size = 120
+
+[sub_resource type="LabelSettings" id="LabelSettings_5rkg0"]
+font = SubResource("SystemFont_i23br")
+font_size = 50
+
+[node name="Player" type="RigidBody2D" unique_id=1789688868 node_paths=PackedStringArray("gui") groups=["Player"]]
+collision_mask = 269
+mass = 10.0
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 3
+linear_damp = 0.5
+script = ExtResource("1_qgxqk")
+launch_speed = 700.0
+gui = NodePath("GUI/GUI")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1047479646]
+layer = 0
+follow_viewport_enabled = true
+
+[node name="Rope" type="ColorRect" parent="CanvasLayer" unique_id=1818819736 node_paths=PackedStringArray("player")]
+material = SubResource("ShaderMaterial_6lmcw")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_hd5yx")
+player = NodePath("../..")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=2068598639]
+modulate = Color(0.8605186, 0.8242168, 0.9208248, 1)
+z_index = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2098394147]
+visible = false
+texture = ExtResource("2_m7q0d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=954206223]
+shape = SubResource("CircleShape2D_6lmcw")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1141363262]
+position = Vector2(250, 184)
+
+[node name="Timer" type="Timer" parent="." unique_id=828500219]
+wait_time = 0.6
+one_shot = true
+
+[node name="IFrame" type="Timer" parent="." unique_id=1909218653]
+wait_time = 4.0
+
+[node name="GUI" type="CanvasLayer" parent="." unique_id=1286205722]
+
+[node name="GUI" type="Control" parent="GUI" unique_id=1234275894]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_5rkg0")
+
+[node name="Label2" type="Label" parent="GUI/GUI" unique_id=632799099]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -149.5
+offset_right = 149.5
+offset_bottom = 165.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+text = "score: 123"
+label_settings = SubResource("LabelSettings_ej5i3")
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="GUI/GUI" unique_id=759605106]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.037077643, 0.014820735, 0.025350142, 1)
+
+[node name="Label" type="Label" parent="GUI/GUI/ColorRect" unique_id=1249716806]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 96.0
+offset_bottom = 261.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+text = "You Died!"
+label_settings = SubResource("LabelSettings_hd5yx")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="GUI/GUI/ColorRect" unique_id=900793133]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 240.0
+offset_bottom = 405.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+text = "score: 123"
+label_settings = SubResource("LabelSettings_5rkg0")
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://d3exr080thrws"]
+
+[ext_resource type="Script" uid="uid://wxgsnmoregp5" path="res://scenes/title/title.gd" id="1_5vtrw"]
+
+[sub_resource type="SystemFont" id="SystemFont_5vtrw"]
+font_names = PackedStringArray("Noto Sans")
+font_weight = 300
+
+[sub_resource type="LabelSettings" id="LabelSettings_6lmcw"]
+font = SubResource("SystemFont_5vtrw")
+font_size = 120
+
+[sub_resource type="SystemFont" id="SystemFont_2a8rs"]
+font_names = PackedStringArray("Noto Sans")
+font_weight = 200
+
+[sub_resource type="LabelSettings" id="LabelSettings_87uf6"]
+font = SubResource("SystemFont_2a8rs")
+font_size = 38
+
+[sub_resource type="SystemFont" id="SystemFont_6lmcw"]
+font_names = PackedStringArray("Noto Sans")
+
+[node name="Title" type="Control" unique_id=1491195873]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5vtrw")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=553700650]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 138.0
+offset_bottom = 146.0
+grow_horizontal = 2
+color = Color(0.42745098, 0.2627451, 0.3529412, 1)
+
+[node name="Label" type="Label" parent="." unique_id=1989538439]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 165.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+text = "Spider Hook"
+label_settings = SubResource("LabelSettings_6lmcw")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="." unique_id=1225697656]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 146.0
+offset_bottom = 311.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+text = "An incomplete grapling hook game made in like 10 hours."
+label_settings = SubResource("LabelSettings_87uf6")
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1448273319]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=919056617]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer" unique_id=983838961]
+custom_minimum_size = Vector2(240, 70)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_6lmcw")
+theme_override_font_sizes/font_size = 40
+text = "Start"
+
+[node name="Button2" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1775871886]
+custom_minimum_size = Vector2(240, 70)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_6lmcw")
+theme_override_font_sizes/font_size = 40
+text = "Don't Start"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Button2" to="." method="_on_quit_pressed"]
